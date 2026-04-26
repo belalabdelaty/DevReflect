@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevReflect</title>
+  <link rel="stylesheet" href="popup.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header__logo">
+      <span class="header__icon">◈</span>
+      <span class="header__name">DevReflect</span>
+    </div>
+    <div class="header__controls">
+      <button class="btn-icon" id="btn-settings" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <!-- ── Main Content ───────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Score Card -->
+    <section class="score-card" id="score-card">
+      <div class="score-card__ring-wrap">
+        <svg class="score-ring" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle class="score-ring__track" cx="60" cy="60" r="50" />
+          <circle class="score-ring__fill" id="score-ring-fill" cx="60" cy="60" r="50"
+            stroke-dasharray="314"
+            stroke-dashoffset="314"
+          />
+        </svg>
+        <div class="score-card__center">
+          <span class="score-card__value" id="score-value">--</span>
+          <span class="score-card__label" id="score-label">Loading...</span>
+        </div>
+      </div>
+      <div class="score-card__meta">
+        <div class="score-meta-item">
+          <span class="score-meta-item__icon">⚡</span>
+          <div>
+            <div class="score-meta-item__value" id="meta-queries">--</div>
+            <div class="score-meta-item__label">AI Queries</div>
+          </div>
+        </div>
+        <div class="score-meta-item">
+          <span class="score-meta-item__icon">📋</span>
+          <div>
+            <div class="score-meta-item__value" id="meta-copypaste">--</div>
+            <div class="score-meta-item__label">AI Pastes</div>
+          </div>
+        </div>
+        <div class="score-meta-item">
+          <span class="score-meta-item__icon">⏱</span>
+          <div>
+            <div class="score-meta-item__value" id="meta-ai-time">--</div>
+            <div class="score-meta-item__label">On AI Tools</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Time Breakdown Bar -->
+    <section class="section">
+      <div class="section__header">
+        <h2 class="section__title">Time Breakdown</h2>
+        <span class="section__badge" id="time-total">Today</span>
+      </div>
+      <div class="time-bar-wrap">
+        <div class="time-bar">
+          <div class="time-bar__segment time-bar__segment--research" id="bar-research"></div>
+          <div class="time-bar__segment time-bar__segment--ai" id="bar-ai"></div>
+        </div>
+        <div class="time-bar__legend">
+          <span class="legend-dot legend-dot--research"></span>
+          <span class="legend-label">Research <span id="legend-research-time">0m</span></span>
+          <span class="legend-dot legend-dot--ai"></span>
+          <span class="legend-label">AI Tools <span id="legend-ai-time">0m</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Site Breakdown -->
+    <section class="section">
+      <h2 class="section__title">By Site</h2>
+      <div class="site-list" id="site-list">
+        <div class="empty-state">No activity yet today.</div>
+      </div>
+    </section>
+
+    <!-- Hourly Activity Heatmap -->
+    <section class="section">
+      <h2 class="section__title">Activity Today</h2>
+      <div class="heatmap" id="heatmap"></div>
+      <div class="heatmap__labels">
+        <span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span>
+      </div>
+    </section>
+
+    <!-- Feedback Banner -->
+    <div class="feedback-banner" id="feedback-banner" style="display:none">
+      <span class="feedback-banner__icon">💬</span>
+      <p class="feedback-banner__text" id="feedback-text"></p>
+    </div>
+
+  </main>
+
+  <!-- ── Settings Panel ─────────────────────────────────────── -->
+  <div class="settings-overlay" id="settings-overlay" style="display:none">
+    <div class="settings-panel">
+      <div class="settings-panel__header">
+        <h2>Settings</h2>
+        <button class="btn-icon" id="btn-settings-close">✕</button>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <div class="setting-row__label">Tracking</div>
+          <div class="setting-row__desc">Enable/disable all tracking</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-tracking" checked />
+          <span class="toggle__slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <div class="setting-row__label">Notifications</div>
+          <div class="setting-row__desc">Show feedback messages</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-notifications" checked />
+          <span class="toggle__slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row setting-row--vertical">
+        <div class="setting-row__label">Feedback Mode</div>
+        <div class="mode-selector">
+          <button class="mode-btn mode-btn--active" data-mode="sarcastic">😏 Sarcastic</button>
+          <button class="mode-btn" data-mode="motivational">💪 Motivational</button>
+          <button class="mode-btn" data-mode="silent">🔇 Silent</button>
+        </div>
+      </div>
+
+      <button class="btn-danger" id="btn-reset">Reset All Data</button>
+    </div>
+  </div>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <span id="session-status" class="footer__status">
+      <span class="status-dot status-dot--active"></span>
+      Tracking active
+    </span>
+    <span class="footer__version">v1.0.0</span>
+  </footer>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
