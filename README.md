@@ -134,36 +134,6 @@ Final = clamp(0, 100, Base + Bonuses - Penalties)
 | Feedback Mode | Sarcastic | Sarcastic / Motivational / Silent |
 
 ---
-
-##  Scaling Suggestions
-
-### Backend Integration
-- Add a Supabase or Firebase backend
-- Sync daily summaries for cross-device tracking
-- User accounts with anonymized aggregate analytics
-
-### AI Insights
-- Weekly AI-generated "developer report" using the Anthropic API
-- Pattern recognition: "You tend to use AI most on Mondays"
-- Personalized independence goals
-
-### Enhanced Detection
-- Use the Readability heuristic to detect when users actually read SO answers
-- Track GitHub Copilot suggestions accepted/rejected via the VS Code extension
-- Detect "doom-searching" patterns (many tabs opened quickly)
-
-### Analytics Dashboard
-- Full-page dashboard (separate `dashboard.html`) with Chart.js
-- 30-day independence trend chart
-- Heatmap of AI usage by hour-of-day
-
-### Team Features
-- Share anonymized scores with your team
-- Leaderboard (friendly competition)
-- Manager view: team AI dependency trends
-
----
-
 ##  Common Mistakes to Avoid
 
 1. **Storing state only in service worker memory** — it WILL be killed. Always use `chrome.storage`.
@@ -175,15 +145,3 @@ Final = clamp(0, 100, Base + Bonuses - Penalties)
 7. **Overly broad `host_permissions`** — only request what you track; `<all_urls>` is a red flag in the store.
 
 ---
-
-##  Testing Checklist
-
-- [ ] Extension loads without errors in `chrome://extensions`
-- [ ] No errors in the service worker console (`Inspect views: service worker`)
-- [ ] Opening ChatGPT increments AI time after 60s
-- [ ] AI query count increases on prompt submit
-- [ ] Copy from ChatGPT increments AI paste count
-- [ ] Score ring animates on popup open
-- [ ] Settings persist after popup close/reopen
-- [ ] Reset clears all data
-- [ ] Daily rollover creates fresh record
